@@ -1,0 +1,37 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TitleStyle" parent="AppTheme">
+        <item name="android:textSize">@dimen/listItem_title_fontSize</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorTitle</item>
+    </style>
+
+    <style name="AuthorStyle" parent="AppTheme">
+        <item name="android:textSize">@dimen/listItem_author_fontSize</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorAuthor</item>
+    </style>
+
+    <style name="SectionStyle" parent="AppTheme">
+        <item name="android:textSize">@dimen/listItem_section_fontSize</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/colorSection</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">@dimen/listItem_text_padding</item>
+    </style>
+
+    <style name="DateStyle" parent="AppTheme">
+        <item name="android:textSize">@dimen/listItem_date_fontSize</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorDate</item>
+    </style>
+
+</resources>

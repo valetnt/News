@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="Title">The title of this article may be too long, so it is ellipsized</string>
+    <string name="Author">Author Name Surname</string>
+    <string name="Section">Technology</string>
+    <string name="Date">10/04/2017</string>
+</resources>
