@@ -10,7 +10,6 @@
         android:id="@+id/thumbnail"
         android:layout_width="@dimen/listItem_height"
         android:layout_height="@dimen/listItem_height"
-        android:padding="@dimen/listItem_thumbnail_padding"
         android:scaleType="centerInside"
         android:src="@drawable/guardian_logo" />
 

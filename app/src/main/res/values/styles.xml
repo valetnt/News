@@ -23,7 +23,7 @@
     <style name="SectionStyle" parent="AppTheme">
         <item name="android:textSize">@dimen/listItem_section_fontSize</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:background">@color/colorSection</item>
+        <item name="android:background">@color/colorSectionTechnology</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:padding">@dimen/listItem_text_padding</item>
     </style>
@@ -32,6 +32,17 @@
         <item name="android:textSize">@dimen/listItem_date_fontSize</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorDate</item>
+    </style>
+
+    <style name="EmptyListMessage1" parent="AppTheme">
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:textSize">@dimen/emptyList_message1_fontSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EmptyListMessage2" parent="AppTheme">
+        <item name="android:textSize">@dimen/emptyList_message2_fontSize</item>
+        <item name="android:textColor">@android:color/secondary_text_light</item>
     </style>
 
 </resources>

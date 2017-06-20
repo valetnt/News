@@ -18,7 +18,10 @@
     <dimen name="listItem_section_fontSize">14sp</dimen>
     <dimen name="listItem_text_padding">2dp</dimen>
     <dimen name="listItem_text_vertical_spacing">4dp</dimen>
-    <dimen name="listItem_text_horizontal_margin">10dp</dimen>
-    <dimen name="listItem_thumbnail_padding">6dp</dimen>
+    <dimen name="listItem_text_horizontal_margin">16dp</dimen>
+
+    <!-- empty list view -->
+    <dimen name="emptyList_message1_fontSize">18sp</dimen>
+    <dimen name="emptyList_message2_fontSize">16sp</dimen>
 
 </resources>
