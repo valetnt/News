@@ -14,12 +14,12 @@
     <!-- list_item.xml -->
     <dimen name="listItem_image_height">52dp</dimen>
     <dimen name="listItem_image_width">72dp</dimen>
-    <dimen name="listItem_title_fontSize">15sp</dimen>
+    <dimen name="listItem_title_fontSize">16sp</dimen>
     <dimen name="listItem_author_fontSize">13sp</dimen>
     <dimen name="listItem_date_fontSize">14sp</dimen>
     <dimen name="listItem_section_fontSize">13sp</dimen>
     <dimen name="listItem_text_padding">2dp</dimen>
-    <dimen name="listItem_text_vertical_spacing">4dp</dimen>
+    <dimen name="listItem_text_vertical_spacing">2dp</dimen>
     <dimen name="listItem_text_horizontal_margin">12dp</dimen>
 
     <!-- empty list view -->

@@ -23,7 +23,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Article>> {
 
-    public static final String QUERY = "https://content.guardianapis.com/search?tag=science/physics&section=science|technology|education|environment&show-fields=thumbnail&show-tags=contributor&order-by=newest&api-key=test";
+    public static final String QUERY = "https://content.guardianapis.com/search?" +
+            "q=physics%20AND%20NOT%20obituary" +
+            "&tag=science/physics|education/physics" +
+            "&section=science|technology|education|environment" +
+            "&show-fields=thumbnail&show-tags=contributor&order-by=newest" +
+            "&page-size=30&api-key=test";
     public static final String SECTION_NAME1 = "Technology";
     public static final String SECTION_NAME2 = "Science";
     public static final String SECTION_NAME3 = "Education";
