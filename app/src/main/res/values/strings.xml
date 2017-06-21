@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">Science&amp;Technology News</string>
+    <string name="app_name">Physics News</string>
     <string name="Title">The title of this article may be too long, so it is ellipsized</string>
     <string name="Author">Author Name Surname</string>
     <string name="Section">Technology</string>
-    <string name="Date">10/04/2017</string>
+    <string name="Date">10/04/17</string>
     <string name="empty_view_message1">No articles found.</string>
     <string name="empty_view_message2">Please, check again later.</string>
     <string name="no_connection1">You are offline.</string>
     <string name="no_connection2">Please, check your internet connection.</string>
+    <string name="action1">Reload List</string>
 </resources>

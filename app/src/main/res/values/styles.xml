@@ -25,12 +25,11 @@
         <item name="android:textStyle">bold</item>
         <item name="android:background">@color/colorSectionTechnology</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:padding">@dimen/listItem_text_padding</item>
     </style>
 
     <style name="DateStyle" parent="AppTheme">
         <item name="android:textSize">@dimen/listItem_date_fontSize</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorDate</item>
     </style>
 

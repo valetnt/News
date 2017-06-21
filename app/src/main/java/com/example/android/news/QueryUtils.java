@@ -236,12 +236,14 @@ public class QueryUtils {
                         // Get authors
                         String authors = "";
                         JSONArray tags = item.getJSONArray("tags");
-                        JSONObject firstAuthor = tags.getJSONObject(0);
-                        if (firstAuthor.has("webTitle")) {
-                            if (tags.length() > 1) {
-                                authors = firstAuthor.getString("webTitle") + ", ...";
-                            } else if (tags.length() == 1) {
-                                authors = firstAuthor.getString("webTitle");
+                        if(tags.length() > 0) {
+                            JSONObject firstAuthor = tags.getJSONObject(0);
+                            if (firstAuthor.has("webTitle")) {
+                                if (tags.length() > 1) {
+                                    authors = firstAuthor.getString("webTitle") + ", ...";
+                                } else if (tags.length() == 1) {
+                                    authors = firstAuthor.getString("webTitle");
+                                }
                             }
                         }
 

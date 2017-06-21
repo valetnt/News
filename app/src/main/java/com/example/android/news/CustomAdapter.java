@@ -15,6 +15,8 @@ import java.util.List;
 
 import static com.example.android.news.MainActivity.SECTION_NAME1;
 import static com.example.android.news.MainActivity.SECTION_NAME2;
+import static com.example.android.news.MainActivity.SECTION_NAME3;
+import static com.example.android.news.MainActivity.SECTION_NAME4;
 
 
 public class CustomAdapter extends ArrayAdapter<Article> {
@@ -68,6 +70,12 @@ public class CustomAdapter extends ArrayAdapter<Article> {
         } else if (item.getSection().equals(SECTION_NAME2)) {
             section.setBackgroundColor(ContextCompat.getColor(rootView.getContext(),
                     R.color.colorSectionScience));
+        } else if (item.getSection().equals(SECTION_NAME3)) {
+            section.setBackgroundColor(ContextCompat.getColor(rootView.getContext(),
+                    R.color.colorSectionEducation));
+        } else if (item.getSection().equals(SECTION_NAME4)) {
+            section.setBackgroundColor(ContextCompat.getColor(rootView.getContext(),
+                    R.color.colorSectionEnvironment));
         }
 
         return rootView;

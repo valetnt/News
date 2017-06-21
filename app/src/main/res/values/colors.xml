@@ -6,6 +6,8 @@
     <color name="colorTitle">#C51162</color>
     <color name="colorAuthor">@android:color/secondary_text_light</color>
     <color name="colorSectionTechnology">#0277BD</color>
-    <color name="colorSectionScience">#BF360C</color>
+    <color name="colorSectionScience">#8E24AA</color>
+    <color name="colorSectionEducation">#E65100</color>
+    <color name="colorSectionEnvironment">#33691E</color>
     <color name="colorDate">@android:color/tertiary_text_light</color>
 </resources>

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,11 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>> {
+public class MainActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<Article>> {
 
-    public static final String QUERY = "https://content.guardianapis.com/search?section=science|technology&show-fields=thumbnail&show-tags=contributor&api-key=test";
+    public static final String QUERY = "https://content.guardianapis.com/search?tag=science/physics&section=science|technology|education|environment&show-fields=thumbnail&show-tags=contributor&order-by=newest&api-key=test";
     public static final String SECTION_NAME1 = "Technology";
     public static final String SECTION_NAME2 = "Science";
+    public static final String SECTION_NAME3 = "Education";
+    public static final String SECTION_NAME4 = "Environment";
 
     private TextView mEmptyMessage1;
     private TextView mEmptyMessage2;
@@ -36,11 +41,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mListView = (ListView) findViewById(R.id.list);
         // Create a custom adapter with an empty array list
         mAdapter = new CustomAdapter(this, new ArrayList<Article>());
         // Set this adapter to the list view
         mListView.setAdapter(mAdapter);
+
+        mEmptyView = findViewById(R.id.empty_view);
+        mEmptyMessage1 = (TextView) findViewById(R.id.empty_view_1);
+        mEmptyMessage2 = (TextView) findViewById(R.id.empty_view_2);
+        // Set mEmptyView as the view to be displayed when mListView is empty
+        mListView.setEmptyView(mEmptyView);
 
         /**
          * Set an {@link android.widget.AdapterView.OnItemClickListener} on the ListView,
@@ -57,21 +69,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(openWebPage);
             }
         });
-
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-
-        mEmptyView = findViewById(R.id.empty_view);
-        mEmptyMessage1 = (TextView) findViewById(R.id.empty_view_1);
-        mEmptyMessage2 = (TextView) findViewById(R.id.empty_view_2);
-        // Set mEmptyView as the view to be displayed when mListView is empty
-        mListView.setEmptyView(mEmptyView);
-        // Initially hide the empty view
-        mEmptyView.setVisibility(View.GONE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        // Initially hide the empty view, so that only the progress bar is showing
+        mEmptyView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
         /*
          * CHECK INTERNET CONNECTION:
          *
@@ -85,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
          * is that we are going to invoke initLoader every time the activity is resumed.
          * Therefore we are going to issue more server queries.
          */
-        LoaderManager loaderManager = getSupportLoaderManager();
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         boolean isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
@@ -97,14 +101,39 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
              * First argument of method initLoader is arbitrary
              * (we don't care since we only use one loader).
              */
+            LoaderManager loaderManager = getSupportLoaderManager();
             loaderManager.initLoader(0, null, this);
         } else {
-            // If the device is disconnected, hide the progress bar and display the empty view
+            // If the device is offline and a loader already exists,
+            // then intercept it before it starts loading data and kill it.
+            // Thus the message displayed will be "you are offline",
+            // rather than "no results found".
+            if (getSupportLoaderManager().getLoader(0) != null) {
+                getSupportLoaderManager().destroyLoader(0);
+            }
+            // Hide the progress bar and display the empty view
             // with a message warning the user that he is offline
             mProgressBar.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
             mEmptyMessage1.setText(getString(R.string.no_connection1));
             mEmptyMessage2.setText(getString(R.string.no_connection2));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemID = item.getItemId();
+        if(itemID == R.id.action_reload) {
+            onResume();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -142,4 +171,5 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // When the Loader is no longer needed, clear data
         mAdapter.clear();
     }
+
 }
