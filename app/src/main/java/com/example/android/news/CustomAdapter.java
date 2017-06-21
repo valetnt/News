@@ -3,6 +3,7 @@ package com.example.android.news;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import static com.example.android.news.MainActivity.SECTION_NAME1;
+import static com.example.android.news.MainActivity.SECTION_NAME2;
 
 
 public class CustomAdapter extends ArrayAdapter<Article> {
@@ -57,6 +61,14 @@ public class CustomAdapter extends ArrayAdapter<Article> {
         author.setText(item.getAuthor());
         section.setText(item.getSection());
         date.setText(item.getDate());
+
+        if (item.getSection().equals(SECTION_NAME1)) {
+            section.setBackgroundColor(ContextCompat.getColor(rootView.getContext(),
+                    R.color.colorSectionTechnology));
+        } else if (item.getSection().equals(SECTION_NAME2)) {
+            section.setBackgroundColor(ContextCompat.getColor(rootView.getContext(),
+                    R.color.colorSectionScience));
+        }
 
         return rootView;
     }

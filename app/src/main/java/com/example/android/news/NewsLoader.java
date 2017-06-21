@@ -35,6 +35,5 @@ public class NewsLoader extends AsyncTaskLoader<List<Article>> {
             return QueryUtils.fetchNewsArticles(mQuery);
         }
         return null;
-
     }
 }

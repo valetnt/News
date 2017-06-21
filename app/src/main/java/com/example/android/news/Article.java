@@ -9,17 +9,19 @@ public class Article {
     private String mAuthor;
     private String mDate;
     private String mSection;
+    private String mLink;
     private Bitmap mThumbnail;
     private boolean mHasThumbnail = false;
 
     /*
      * Constructor
      */
-    public Article(String title, String author, String date, String section) {
+    public Article(String title, String author, String date, String section, String link) {
         mTitle = title;
         mAuthor = author;
         mDate = date;
         mSection = section;
+        mLink = link;
     }
 
     /*
@@ -39,6 +41,10 @@ public class Article {
 
     public String getSection() {
         return mSection;
+    }
+
+    public String getLink() {
+        return mLink;
     }
 
     // Call getThumbnail() ONLY IF hasThumbnail() has returned TRUE

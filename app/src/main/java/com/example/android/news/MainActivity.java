@@ -1,12 +1,15 @@
 package com.example.android.news;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>> {
 
     public static final String QUERY = "https://content.guardianapis.com/search?section=science|technology&show-fields=thumbnail&show-tags=contributor&api-key=test";
+    public static final String SECTION_NAME1 = "Technology";
+    public static final String SECTION_NAME2 = "Science";
 
     private TextView mEmptyMessage1;
     private TextView mEmptyMessage2;
@@ -37,6 +42,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Set this adapter to the list view
         mListView.setAdapter(mAdapter);
 
+        /**
+         * Set an {@link android.widget.AdapterView.OnItemClickListener} on the ListView,
+         * so by clicking any article in the list it is possible to
+         * read the full article on the related page on the Guardian website.
+         * This is achieved by sending an intent to a web browser.
+         */
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Article selectedArticle = mAdapter.getItem(position);
+                Intent openWebPage = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(selectedArticle.getLink()));
+                startActivity(openWebPage);
+            }
+        });
+
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         mEmptyView = findViewById(R.id.empty_view);
@@ -44,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mEmptyMessage2 = (TextView) findViewById(R.id.empty_view_2);
         // Set mEmptyView as the view to be displayed when mListView is empty
         mListView.setEmptyView(mEmptyView);
+        // Initially hide the empty view
+        mEmptyView.setVisibility(View.GONE);
     }
 
     @Override
@@ -105,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter.clear();
 
         if (data == null || data.isEmpty()) {
-            mEmptyMessage1.setText(getString(R.string.no_connection1));
-            mEmptyMessage2.setText(getString(R.string.no_connection2));
+            mEmptyMessage1.setText(getString(R.string.empty_view_message1));
+            mEmptyMessage2.setText(getString(R.string.empty_view_message2));
 
         } else {
             // Update the Adapter. This will trigger the ListView to update too.
