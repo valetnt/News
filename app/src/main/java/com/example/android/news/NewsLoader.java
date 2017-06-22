@@ -2,6 +2,7 @@ package com.example.android.news;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.util.Log;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 public class NewsLoader extends AsyncTaskLoader<List<Article>> {
 
+    private static final String LOG_TAG = NewsLoader.class.getSimpleName();
     private String mQuery;
 
     public NewsLoader(Context context, String query) {
@@ -32,6 +34,9 @@ public class NewsLoader extends AsyncTaskLoader<List<Article>> {
     public List<Article> loadInBackground() {
         // Perform the HTTP request for news articles and process the response.
         if (mQuery != null) {
+
+            Log.i(LOG_TAG, "+++ Issuing a new server query... +++");
+
             return QueryUtils.fetchNewsArticles(mQuery);
         }
         return null;

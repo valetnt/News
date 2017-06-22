@@ -308,7 +308,7 @@ public class QueryUtils {
                 }
             } else {
                 // If the request was not successful, print the error code in the Logcat
-                Log.e(LOG_TAG, "Could not retrieve Bitmap. " +
+                Log.e(LOG_TAG, "Could not retrieve bitmap image. " +
                         "Connection to server has failed with response code: "
                         + urlConnection.getResponseCode());
             }

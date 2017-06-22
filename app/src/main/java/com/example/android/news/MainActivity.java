@@ -77,23 +77,23 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         // Initially hide the empty view, so that only the progress bar is showing
         mEmptyView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
         /*
          * CHECK INTERNET CONNECTION:
          *
-         * Make this check onResume(), rather than onCreate(), since the loader is restarted
-         * every time the activity is resumed.
-         * In this way, if the activity is resumed with internet connection off,
+         * Make this check onStart(), rather than onCreate(), since the loader is restarted
+         * every time the activity is restarted.
+         * In this way, if the user presses the HOME button, does other things, and then, after a
+         * while, he relaunches the app from "Recent Tasks" with internet connection off,
          * the empty message that the user is going to receive is "you are offline",
          * rather than "no results found", which is more consistent with what the user expects.
          *
-         * The price to pay for making this check onResume(), rather than onCreate(),
-         * is that we are going to invoke initLoader every time the activity is resumed.
-         * Therefore we are going to issue more server queries.
+         * The price to pay for making this check onStart(), rather than onCreate(),
+         * is that we are going to issue more server queries.
          */
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -135,7 +135,26 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemID = item.getItemId();
         if(itemID == R.id.action_reload) {
-            onResume();
+            /*
+             * Reload the news feed.
+             * This action is needed when:
+             *
+             * 1. The user has just switched on Internet connection, and wants to see the news feed
+             *    update immediately, without having to exit the app and relaunch it.
+             *
+             *    OR
+             *
+             * 2. The user wants to reload the results to see if a new article has just come out.
+             *
+             * In the first case, it is sufficient to restart the activity
+             * to issue a new server query.
+             *
+             * In the second case, we have to force the loader to be recreated from scratch:
+             */
+            if (getSupportLoaderManager().getLoader(0) != null) {
+                getSupportLoaderManager().destroyLoader(0);
+            }
+            onStart();
             return true;
         }
         return false;
